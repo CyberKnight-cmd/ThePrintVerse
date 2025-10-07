@@ -98,6 +98,7 @@ const Header = () => {
               <button 
                 className="sm:hidden p-2 text-gray-600 hover:text-blue-600"
                 onClick={() => setShowMobileSearch(!showMobileSearch)}
+                title="Open search"
               >
                 <FaMagnifyingGlass className="w-4 h-4" />
               </button>
