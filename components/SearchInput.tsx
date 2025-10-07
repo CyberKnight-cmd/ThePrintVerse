@@ -27,15 +27,16 @@ const SearchInput = () => {
   };
 
   return (
-    <form className="flex w-full justify-center" onSubmit={searchProducts}>
+    <form className="flex w-full" onSubmit={searchProducts}>
       <input
         type="text"
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
         placeholder="Type here"
-        className="bg-gray-50 input input-bordered w-[70%] rounded-r-none outline-none focus:outline-none max-sm:w-full"
+        className="bg-gray-50 input input-bordered flex-1 rounded-r-none outline-none focus:outline-none text-sm sm:text-base"
+        suppressHydrationWarning
       />
-      <button type="submit" className="btn bg-blue-500 text-white rounded-l-none rounded-r-xl hover:bg-blue-600">
+      <button type="submit" className="btn bg-blue-500 text-white rounded-l-none px-3 sm:px-6 text-sm sm:text-base hover:bg-blue-600">
         Search
       </button>
     </form>

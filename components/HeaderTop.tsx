@@ -26,44 +26,44 @@ const HeaderTop = () => {
     toast.success("Logout successful!");
   }
   return (
-    <div className="h-10 text-white bg-blue-500 max-lg:px-5 max-lg:h-16 max-[573px]:px-0">
-      <div className="flex justify-between h-full max-lg:flex-col max-lg:justify-center max-lg:items-center max-w-screen-2xl mx-auto px-12 max-[573px]:px-0">
-        <ul className="flex items-center h-full gap-x-5 max-[370px]:text-sm max-[370px]:gap-x-2">
-          <li className="flex items-center gap-x-2 font-semibold">
-            <FaHeadphones className="text-white" />
-            <span>+1 (555) 123-PRINT</span>
-          </li>
-          <li className="flex items-center gap-x-2 font-semibold">
-            <FaRegEnvelope className="text-white text-xl" />
-            <span>hello@theprintverse.com</span>
-          </li>
-        </ul>
-        <ul className="flex items-center gap-x-5 h-full max-[370px]:text-sm max-[370px]:gap-x-2 font-semibold">
-          {!session ? ( 
-          <>
-          <li className="flex items-center">
-            <Link href="/login" className="flex items-center gap-x-2 font-semibold">
+    <div className="h-10 sm:h-12 text-white bg-blue-500">
+      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12 h-full">
+        <div className="flex justify-between items-center h-full text-xs sm:text-sm">
+          <div className="flex items-center gap-2 sm:gap-4">
+            <div className="flex items-center gap-1 sm:gap-2">
+              <FaHeadphones className="text-white" />
+              <span className="hidden sm:inline">+1 (555) 123-PRINT</span>
+              <span className="sm:hidden">Call Us</span>
+            </div>
+            <div className="flex items-center gap-1 sm:gap-2">
+              <FaRegEnvelope className="text-white" />
+              <span className="hidden md:inline">hello@theprintverse.com</span>
+              <span className="md:hidden">Email</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 sm:gap-4">
+            {!session ? ( 
+            <>
+            <Link href="/login" className="flex items-center gap-1 hover:text-gray-200">
               <FaRegUser className="text-white" />
               <span>Login</span>
             </Link>
-          </li>
-          <li className="flex items-center">
-            <Link href="/register" className="flex items-center gap-x-2 font-semibold">
+            <Link href="/register" className="flex items-center gap-1 hover:text-gray-200">
               <FaRegUser className="text-white" />
               <span>Register</span>
             </Link>
-          </li>
-          </>
-          ) :  (<>
-          <span className="ml-10 text-base">{session.user?.email}</span>
-          <li className="flex items-center">
-            <button onClick={() => handleLogout()} className="flex items-center gap-x-2 font-semibold">
+            </>
+            ) : (
+            <>
+            <span className="text-xs sm:text-sm truncate max-w-[100px] sm:max-w-none">{session.user?.email}</span>
+            <button onClick={() => handleLogout()} className="flex items-center gap-1 hover:text-gray-200">
               <FaRegUser className="text-white" />
-              <span>Log out</span>
+              <span>Logout</span>
             </button>
-          </li>
-          </>)}
-        </ul>
+            </>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

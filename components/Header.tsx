@@ -15,7 +15,7 @@ import HeaderTop from "./HeaderTop";
 import Image from "next/image";
 import SearchInput from "./SearchInput";
 import Link from "next/link";
-import { FaBell } from "react-icons/fa6";
+import { FaBell, FaMagnifyingGlass } from "react-icons/fa6";
 
 import CartElement from "./CartElement";
 import NotificationBell from "./NotificationBell";
@@ -29,6 +29,7 @@ const Header = () => {
   const { data: session, status } = useSession();
   const pathname = usePathname();
   const { wishlist, setWishlist, wishQuantity } = useWishlistStore();
+  const [showMobileSearch, setShowMobileSearch] = useState(false);
 
   const handleLogout = () => {
     setTimeout(() => signOut(), 1000);
@@ -77,33 +78,56 @@ const Header = () => {
     <header className="bg-white">
       <HeaderTop />
       {pathname.startsWith("/admin") === false && (
-        <div className="h-32 bg-white flex items-center justify-between px-16 max-[1320px]:px-16 max-md:px-6 max-lg:flex-col max-lg:gap-y-7 max-lg:justify-center max-lg:h-60 max-w-screen-2xl mx-auto">
-          <Link href="/">
-            <img src="/logo v1 svg.svg" width={300} height={300} alt="The Print Verse logo" className="relative right-5 max-[1023px]:w-56" />
-          </Link>
-          <SearchInput />
-          <div className="flex gap-x-10 items-center">
-            <NotificationBell />
-            <HeartElement wishQuantity={wishQuantity} />
-            <CartElement />
+        <>
+          <div className="h-16 sm:h-20 bg-white flex items-center justify-between px-4 sm:px-6 lg:px-16 max-w-screen-2xl mx-auto">
+            <Link href="/">
+              <Image 
+                src="/logo v1.png" 
+                width={300} 
+                height={300} 
+                alt="The Print Verse logo" 
+                className="w-24 sm:w-32 lg:w-40 h-auto" 
+              />
+            </Link>
+            
+            <div className="hidden sm:block flex-1 max-w-sm mx-4">
+              <SearchInput />
+            </div>
+            
+            <div className="flex items-center gap-2 sm:gap-4">
+              <button 
+                className="sm:hidden p-2 text-gray-600 hover:text-blue-600"
+                onClick={() => setShowMobileSearch(!showMobileSearch)}
+              >
+                <FaMagnifyingGlass className="w-4 h-4" />
+              </button>
+              <NotificationBell />
+              <HeartElement wishQuantity={wishQuantity} />
+              <CartElement />
+            </div>
           </div>
-        </div>
+          {showMobileSearch && (
+            <div className="sm:hidden bg-white border-t px-4 py-2">
+              <SearchInput />
+            </div>
+          )}
+        </>
       )}
       {pathname.startsWith("/admin") === true && (
-        <div className="flex justify-between h-32 bg-white items-center px-16 max-[1320px]:px-10  max-w-screen-2xl mx-auto max-[400px]:px-5">
+        <div className="flex justify-between h-16 sm:h-20 bg-white items-center px-4 sm:px-6 lg:px-16 max-w-screen-2xl mx-auto">
           <Link href="/">
             <Image
               src="/logo v1.png"
               width={130}
               height={130}
               alt="The Print Verse logo"
-              className="w-56 h-auto"
+              className="w-24 sm:w-32 lg:w-40 h-auto"
             />
           </Link>
-          <div className="flex gap-x-5 items-center">
+          <div className="flex gap-2 sm:gap-4 items-center">
             <NotificationBell />
             <div className="dropdown dropdown-end">
-              <div tabIndex={0} role="button" className="w-10">
+              <div tabIndex={0} role="button" className="w-8 sm:w-10">
                 <Image
                   src="/randomuser.jpg"
                   alt="random profile photo"
@@ -114,7 +138,7 @@ const Header = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-48 sm:w-52"
               >
                 <li>
                   <Link href="/admin">Dashboard</Link>

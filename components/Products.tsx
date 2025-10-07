@@ -66,15 +66,28 @@ const Products = async ({ params, searchParams }: { params: { slug?: string[] },
   }
 
   return (
-    <div className="grid grid-cols-3 justify-items-center gap-x-2 gap-y-5 max-[1300px]:grid-cols-3 max-lg:grid-cols-2 max-[500px]:grid-cols-1">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 p-4">
       {products.length > 0 ? (
-        products.map((product: any) => (
-          <ProductItem key={product.id} product={product} color="black" />
+        products.map((product: any, index: number) => (
+          <div 
+            key={product.id} 
+            className="animate-fade-in"
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
+            <ProductItem product={product} color="black" />
+          </div>
         ))
       ) : (
-        <h3 className="text-3xl mt-5 text-center w-full col-span-full max-[1000px]:text-2xl max-[500px]:text-lg">
-          No products found for specified query
-        </h3>
+        <div className="col-span-full flex flex-col items-center justify-center py-12 animate-fade-in">
+          <div className="backdrop-blur-md bg-white/10 dark:bg-gray-800/10 rounded-xl p-8 text-center">
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-600 dark:text-gray-300">
+              No products found for specified query
+            </h3>
+            <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 mt-2">
+              Try adjusting your filters or search terms
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );

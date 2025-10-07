@@ -9,7 +9,7 @@
 // *********************
 
 import React from "react";
-import ProductItem from "./ProductItem";
+import ProductCarousel from "./ProductCarousel";
 import Heading from "./Heading";
 import apiClient from "@/lib/api";
 
@@ -34,19 +34,21 @@ const ProductsSection = async () => {
   }
 
   return (
-    <div className="bg-blue-500 border-t-4 border-white">
-      <div className="max-w-screen-2xl mx-auto pt-20">
+    <div className="relative overflow-hidden">
+      {/* Smooth gradient continuation */}
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-600 via-blue-500 to-blue-800"></div>
+      <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-blue-400/20 to-white/15" style={{animation: 'pulse 12s ease-in-out infinite'}}></div>
+      
+      {/* Subtle floating particles */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-24 right-16 w-2 h-2 bg-white/12 rounded-full" style={{animation: 'float 18s ease-in-out infinite'}}></div>
+        <div className="absolute bottom-28 left-1/5 w-1.5 h-1.5 bg-white/10 rounded-full" style={{animation: 'float 20s ease-in-out infinite', animationDelay: '8s'}}></div>
+      </div>
+      
+      <div className="relative z-10 py-12 sm:py-16 lg:py-20 border-t-4 border-white/20">
         <Heading title="FEATURED PRODUCTS" />
-        <div className="grid grid-cols-4 justify-items-center max-w-screen-2xl mx-auto py-10 gap-x-2 px-10 gap-y-8 max-xl:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1">
-          {products.length > 0 ? (
-            products.map((product: any) => (
-              <ProductItem key={product.id} product={product} color="white" />
-            ))
-          ) : (
-            <div className="col-span-full text-center text-white py-10">
-              <p>No products available at the moment.</p>
-            </div>
-          )}
+        <div className="mt-8 sm:mt-12">
+          <ProductCarousel products={products} />
         </div>
       </div>
     </div>

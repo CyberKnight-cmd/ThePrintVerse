@@ -8,12 +8,19 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Providers from "@/Providers";
 import SessionTimeoutWrapper from "@/components/SessionTimeoutWrapper";
+import ClientLayout from "@/components/ClientLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "The Print Verse - Custom Metal Posters, Magnets & Frames",
-  description: "Transform your memories into stunning metal posters, fridge magnets, and custom frames. Premium quality printing services for your home and office.",
+  title: "ThePrintVerse - Custom Printing Solutions | Metal Posters, Magnets & Frames",
+  description: "Transform your memories into stunning custom prints. Premium metal posters, fridge magnets, picture frames, and more. Fast, high-quality printing services.",
+  keywords: "custom printing, metal posters, fridge magnets, picture frames, photo printing, personalized gifts",
+  openGraph: {
+    title: "ThePrintVerse - Custom Printing Solutions",
+    description: "Premium custom printing services for your memories",
+    type: "website",
+  },
 };
 
 export default async function RootLayout({
@@ -26,12 +33,14 @@ export default async function RootLayout({
     <html lang="en" data-theme="light">
       <body className={inter.className}>
         <SessionProvider session={session}>
-          <SessionTimeoutWrapper />
-          <Header />
-          <Providers>
-            {children}
-          </Providers>
-          <Footer />
+          <ClientLayout>
+            <SessionTimeoutWrapper />
+            <Header />
+            <Providers>
+              {children}
+            </Providers>
+            <Footer />
+          </ClientLayout>
         </SessionProvider>
       </body>
     </html>
